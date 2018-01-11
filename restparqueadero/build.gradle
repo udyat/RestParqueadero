@@ -13,11 +13,15 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
 
 group = 'com.co.ceiba'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
-
+jacoco {
+    toolVersion = "0.7.9"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
 repositories {
 	mavenCentral()
 }
@@ -28,5 +32,30 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compile('mysql:mysql-connector-java:5.1.39')
+	testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testImplementation 'junit:junit:4.12'
 }
+jar {
+	manifest{
+		attributes 'Implementation-Title': 'restparqueadero',
+					'Implementation-Version': version
+	}
+}
+
+test {
+	jacoco {
+		append = false
+		destinationFile = file("jacoco/jacocoTest.exec")
+	}
+	reports.junitXml.destination = file("jacoco/test-results")
+}
+
+jacocoTestReport{
+	reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("$buildDir/reports/jacoco/jacocoHtml")
+    }
+}
+jacocoTestReport.dependsOn(test)
