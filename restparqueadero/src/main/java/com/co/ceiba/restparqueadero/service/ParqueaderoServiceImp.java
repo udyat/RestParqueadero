@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.co.ceiba.restparqueadero.bean.ResponseIngreso;
 import com.co.ceiba.restparqueadero.model.TiposVehiculo;
 import com.co.ceiba.restparqueadero.model.Vehiculo;
-import com.co.ceiba.restparqueadero.properties.Properties;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
+import com.co.ceiba.restparqueadero.util.Properties;
 
 @Transactional
 @Service

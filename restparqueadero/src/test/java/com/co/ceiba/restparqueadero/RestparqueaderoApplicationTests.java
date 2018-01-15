@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.co.ceiba.restparqueadero.model.TiposVehiculo;
-import com.co.ceiba.restparqueadero.properties.Properties;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
 import com.co.ceiba.restparqueadero.service.ParqueaderoService;
+import com.co.ceiba.restparqueadero.util.Properties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
