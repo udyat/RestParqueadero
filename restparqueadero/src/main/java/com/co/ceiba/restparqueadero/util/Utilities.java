@@ -14,8 +14,7 @@ public class Utilities {
 		return match.matches();
 	}
 	public boolean valRegla(String placa,String regla ) {
-		
-		if (String.valueOf(placa.charAt(0)) == regla) {
+		if (String.valueOf(placa.charAt(0)).equalsIgnoreCase(regla)) {
 			Date now = new Date();
 			Calendar calendar = Calendar.getInstance();
 	        calendar.setTime(now); 
