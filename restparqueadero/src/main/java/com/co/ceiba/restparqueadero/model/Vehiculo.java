@@ -5,8 +5,6 @@ import javax.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.Date;
 
 
@@ -35,8 +33,6 @@ public class Vehiculo implements Serializable {
 	@JoinColumn(name="fk_tipo_vehiculo")
 	private TiposVehiculo tiposVehiculo;
 
-	public Vehiculo() {
-	}
 
 	public String getPlaca() {
 		return this.placa;

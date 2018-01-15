@@ -2,8 +2,6 @@ package com.co.ceiba.restparqueadero.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.co.ceiba.restparqueadero.bean.ResponseIngreso;
 import com.co.ceiba.restparqueadero.model.Vehiculo;
 

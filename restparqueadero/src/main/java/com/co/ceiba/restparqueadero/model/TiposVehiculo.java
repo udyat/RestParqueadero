@@ -2,7 +2,6 @@ package com.co.ceiba.restparqueadero.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -21,10 +20,6 @@ public class TiposVehiculo implements Serializable {
 
 	private String descripcion;
 
-	
-
-	public TiposVehiculo() {
-	}
 
 	public int getIdTipoVehiculo() {
 		return this.idTipoVehiculo;

@@ -30,7 +30,22 @@ public class RestparqueaderoApplicationTests {
 	ParqueaderoService parqueaderoService;
 	
 	@Test
-	public void ingresarVehiculo() {
+	public void ingresarVehiculoMoto() {
+		Vehiculo vehiculo = new Vehiculo();
+		Date hora = new Date();
+		hora.getTime();
+		vehiculo.setHoraIngreso(hora);
+		vehiculo.setPlaca("AAA111");
+		vehiculo.setPropietario("Nombre");
+		TiposVehiculo tipo = new TiposVehiculo();
+		tipo.setIdTipoVehiculo(1);
+		vehiculo.setTiposVehiculo(tipo);
+		parqueaderoService.ingresoVehiculo(vehiculo);
+		vehiculoRepositorio.delete(vehiculo.getPlaca());
+	}
+	
+	@Test
+	public void ingresarVehiculoCarro() {
 		Vehiculo vehiculo = new Vehiculo();
 		Date hora = new Date();
 		hora.getTime();
