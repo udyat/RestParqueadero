@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -37,21 +39,7 @@ public class RestparqueaderoApplicationTests {
 //	}
 	@Test
 	public void contextLoads2() {
-		TiposVehiculo tipoV = new TiposVehiculo();
-		tipoV.setIdTipoVehiculo(2);
-		int listaVehiculos = vehiculoRepositorio.countByTiposVehiculo(tipoV);
-		
-		 Pattern p = Pattern.compile("^[A-Z]{3}\\d{3}");
-		 Matcher m = p.matcher("ASN575");
-		 boolean b = m.matches();
-		 
-		 Date now = new Date();
-			Calendar calendar = Calendar.getInstance();
-	        calendar.setTime(now); 
-			//if(calendar.get(Calendar.DAY_OF_WEEK) == )
-		
-		System.out.println(properties.msgMaxCarros + calendar.get(Calendar.DAY_OF_WEEK));
-		
+
 	}
 
 }
