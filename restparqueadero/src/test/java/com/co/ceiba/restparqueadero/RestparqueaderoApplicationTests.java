@@ -1,5 +1,7 @@
 package com.co.ceiba.restparqueadero;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,8 +44,13 @@ public class RestparqueaderoApplicationTests {
 		 Pattern p = Pattern.compile("^[A-Z]{3}\\d{3}");
 		 Matcher m = p.matcher("ASN575");
 		 boolean b = m.matches();
+		 
+		 Date now = new Date();
+			Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(now); 
+			//if(calendar.get(Calendar.DAY_OF_WEEK) == )
 		
-		System.out.println(properties.msgMaxCarros + parqueaderoService.calcularValorSalida(""));
+		System.out.println(properties.msgMaxCarros + calendar.get(Calendar.DAY_OF_WEEK));
 		
 	}
 
