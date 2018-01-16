@@ -25,8 +25,14 @@ public class Vehiculo implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="hora_ingreso")
 	private Date horaIngreso;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="hora_salida")
+	private Date horaSalida;
 
 	private String propietario;
+	
+	private int cilindraje;
 
 	//bi-directional many-to-one association to TiposVehiculo
 	@ManyToOne
@@ -48,6 +54,20 @@ public class Vehiculo implements Serializable {
 
 	public void setHoraIngreso(Date horaIngreso) {
 		this.horaIngreso = horaIngreso;
+	}
+	public Date getHoraSalida() {
+		return this.horaSalida;
+	}
+
+	public void setHoraSalida(Date horaSalida) {
+		this.horaSalida = horaSalida;
+	}
+	public int getCilindraje() {
+		return this.cilindraje;
+	}
+
+	public void setCilindraje(int cilindraje) {
+		this.cilindraje = cilindraje;
 	}
 
 	public String getPropietario() {

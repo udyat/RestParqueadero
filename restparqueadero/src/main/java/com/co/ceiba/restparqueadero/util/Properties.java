@@ -6,11 +6,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class Properties {
 	
-	@Value("${parqueadero.mensaje.maxmotos}")
-	public String msgMaxMotos;	
+	@Value("${parqueadero.mensaje.parqueaderolleno}")
+	public String parqueaderoLLeno;	
 	
-	@Value("${parqueadero.mensaje.maxcarros}")
-	public String msgMaxCarros;
+	@Value("${parqueadero.mensaje.error.generico}")
+	public String errorGenerico;
+	
+	@Value("${parqueadero.mensaje.exito}")
+	public String msgExito;
+	
+	@Value("${parqueadero.mensaje.diaHabil}")
+	public String msgDiaHabil;
+	
+	@Value("${parqueadero.mensaje.errorplaca}")
+	public String errorPlaca;
 	
 	@Value("${parqueadero.capacidad.carro}")
 	public int maxCarro;

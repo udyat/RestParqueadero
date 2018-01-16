@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Utilities {
-
+public class ValidacionesIngreso {
+	
 	public boolean valPlaca(String placa) {
 		Pattern pattern = Pattern.compile("^[A-Z]{3}\\d{3}");
 		Matcher match = pattern.matcher(placa);
@@ -23,4 +23,14 @@ public class Utilities {
 			return true;
 		}
 	}
+
+	public boolean valCapacidad(int tipoVehiculo, int conteoAutomovil, Properties properties) {
+		boolean valid = false;
+		if ((tipoVehiculo == 1 && conteoAutomovil < properties.maxMoto)
+				|| (tipoVehiculo == 2 && conteoAutomovil < properties.maxCarro)) {
+			valid = true;
+		}
+		return valid;
+	}
+	
 }

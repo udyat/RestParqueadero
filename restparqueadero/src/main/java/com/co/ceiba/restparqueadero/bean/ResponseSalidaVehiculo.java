@@ -1,15 +1,15 @@
 package com.co.ceiba.restparqueadero.bean;
 
-public class ResponseIngreso {
+public class ResponseSalidaVehiculo {
 	
-	private int codigo;
+	private int valor;
 	private String mensaje;
 	
-	public int getCodigo() {
-		return codigo;
+	public int getValor() {
+		return valor;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 	public String getMensaje() {
 		return mensaje;
