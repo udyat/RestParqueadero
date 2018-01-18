@@ -44,35 +44,18 @@ public class RestparqueaderoApplicationTests {
 	
 	@Test
 	public void ingresarVehiculoMoto() {
-		Vehiculo vehiculo = new Vehiculo();
-		Date hora = new Date();
-		hora.getTime();
-		vehiculo.setHoraIngreso(hora);
-		vehiculo.setPlaca("FAA111");
-		vehiculo.setPropietario("Nombre");
-		TiposVehiculo tipo = new TiposVehiculo();
-		tipo.setIdTipoVehiculo(1);
-		vehiculo.setTiposVehiculo(tipo);
-		vehiculo.setCilindraje(500);
-		//String mensaje = parqueaderoService.ingresoVehiculo(vehiculo);
-		//System.out.println(mensaje);
-		//vehiculoRepositorio.delete(vehiculo.getPlaca());
+		String request = "{'placa': 'DEY555','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		parqueaderoService.ingresoVehiculo(request);
+		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY555");
+		vehiculoRepositorio.delete(vehiculo);
 	}
 	
 	@Test
 	public void ingresarVehiculoCarro() {
-		Vehiculo vehiculo = new Vehiculo();
-		Date hora = new Date();
-		hora.getTime();
-		vehiculo.setHoraIngreso(hora);
-		vehiculo.setPlaca("ROS500");
-		vehiculo.setPropietario("Nombre");
-		TiposVehiculo tipo = new TiposVehiculo();
-		tipo.setIdTipoVehiculo(2);
-		vehiculo.setTiposVehiculo(tipo);
-		//String mensaje = parqueaderoService.ingresoVehiculo(vehiculo);
-		//System.out.println(mensaje);
-		//vehiculoRepositorio.delete(vehiculo.getPlaca());
+		String request = "{'placa': 'DEY510','propietario': 'German','tipoVehiculo': 2}";
+		parqueaderoService.ingresoVehiculo(request);
+		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY510");
+		vehiculoRepositorio.delete(vehiculo);
 	}
 	@Test
 	public void horas() {
@@ -192,8 +175,11 @@ public class RestparqueaderoApplicationTests {
 		vehiculoMap.setCilindraje(0);
 		vehiculoMap.getCilindraje();
 		vehiculoMap.setPlaca("");
+		vehiculoMap.getPlaca();
 		vehiculoMap.setPropietario("");
+		vehiculoMap.getPropietario();
 		vehiculoMap.setTipoVehiculo(1);
+		vehiculoMap.getTipoVehiculo();
 		
 	}
 	
