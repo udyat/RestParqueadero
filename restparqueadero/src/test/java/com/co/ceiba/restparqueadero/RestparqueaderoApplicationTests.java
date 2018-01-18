@@ -132,7 +132,8 @@ public class RestparqueaderoApplicationTests {
 		TiposVehiculo tipov = new TiposVehiculo();
 		tipov.setIdTipoVehiculo(1);
 		vehiculo.setTiposVehiculo(tipov);
-		assertEquals(8000,valSalida.calculoPrecio(10, vehiculo, properties));
+		vehiculo.setCilindraje(500);
+		assertEquals(4000,valSalida.calculoPrecio(10, vehiculo, properties));
 
 	}
 	
@@ -144,7 +145,8 @@ public class RestparqueaderoApplicationTests {
 		TiposVehiculo tipov = new TiposVehiculo();
 		tipov.setIdTipoVehiculo(1);
 		vehiculo.setTiposVehiculo(tipov);
-		assertEquals(8000,valSalida.calculoPrecio(24, vehiculo, properties));
+		vehiculo.setCilindraje(500);
+		assertEquals(4000,valSalida.calculoPrecio(24, vehiculo, properties));
 	}
 	
 	@Test
@@ -154,7 +156,8 @@ public class RestparqueaderoApplicationTests {
 		TiposVehiculo tipov = new TiposVehiculo();
 		tipov.setIdTipoVehiculo(1);
 		vehiculo.setTiposVehiculo(tipov);
-		assertEquals(16000,valSalida.calculoPrecio(40, vehiculo, properties));
+		vehiculo.setCilindraje(500);
+		assertEquals(8000,valSalida.calculoPrecio(40, vehiculo, properties));
 	}
 	
 	@Test
@@ -164,7 +167,8 @@ public class RestparqueaderoApplicationTests {
 		TiposVehiculo tipov = new TiposVehiculo();
 		tipov.setIdTipoVehiculo(1);
 		vehiculo.setTiposVehiculo(tipov);
-		assertEquals(11000,valSalida.calculoPrecio(27, vehiculo, properties));
+		vehiculo.setCilindraje(500);
+		assertEquals(5500,valSalida.calculoPrecio(27, vehiculo, properties));
 	}
 	
 	
