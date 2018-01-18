@@ -34,6 +34,7 @@ dependencies {
 	compile('mysql:mysql-connector-java:5.1.39')
 	compile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testImplementation 'junit:junit:4.12'
 }

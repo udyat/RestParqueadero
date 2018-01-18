@@ -15,12 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.co.ceiba.restparqueadero.bean.ResponseConsulta;
 import com.co.ceiba.restparqueadero.bean.ResponseSalidaVehiculo;
+import com.co.ceiba.restparqueadero.exception.VehiculoException;
 import com.co.ceiba.restparqueadero.model.TiposVehiculo;
 import com.co.ceiba.restparqueadero.model.Vehiculo;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
 import com.co.ceiba.restparqueadero.service.ParqueaderoService;
 import com.co.ceiba.restparqueadero.util.Properties;
+import com.co.ceiba.restparqueadero.util.ValidacionesIngreso;
 import com.co.ceiba.restparqueadero.util.ValidacionesSalida;
 
 @RunWith(SpringRunner.class)
@@ -49,9 +52,9 @@ public class RestparqueaderoApplicationTests {
 		tipo.setIdTipoVehiculo(1);
 		vehiculo.setTiposVehiculo(tipo);
 		vehiculo.setCilindraje(500);
-		String mensaje = parqueaderoService.ingresoVehiculo(vehiculo);
-		System.out.println(mensaje);
-		vehiculoRepositorio.delete(vehiculo.getPlaca());
+		//String mensaje = parqueaderoService.ingresoVehiculo(vehiculo);
+		//System.out.println(mensaje);
+		//vehiculoRepositorio.delete(vehiculo.getPlaca());
 	}
 	
 	@Test
@@ -60,14 +63,14 @@ public class RestparqueaderoApplicationTests {
 		Date hora = new Date();
 		hora.getTime();
 		vehiculo.setHoraIngreso(hora);
-		vehiculo.setPlaca("TAA111");
+		vehiculo.setPlaca("ROS500");
 		vehiculo.setPropietario("Nombre");
 		TiposVehiculo tipo = new TiposVehiculo();
 		tipo.setIdTipoVehiculo(2);
 		vehiculo.setTiposVehiculo(tipo);
-		String mensaje = parqueaderoService.ingresoVehiculo(vehiculo);
-		System.out.println(mensaje);
-		vehiculoRepositorio.delete(vehiculo.getPlaca());
+		//String mensaje = parqueaderoService.ingresoVehiculo(vehiculo);
+		//System.out.println(mensaje);
+		//vehiculoRepositorio.delete(vehiculo.getPlaca());
 	}
 	@Test
 	public void horas() {
@@ -94,10 +97,41 @@ public class RestparqueaderoApplicationTests {
 	}
 	
 	@Test
+	public void testRegla()  {
+		ValidacionesIngreso validacionesIngreso = new ValidacionesIngreso();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(2);
+		vehiculo.setTiposVehiculo(tipov);
+		
+		try {
+			assertEquals(true,validacionesIngreso.valRegla("AGH840",properties));
+		} catch (VehiculoException e) {
+			System.out.println("ERROR" + e);
+		}
+	}
+	
+	@Test
+	public void testConsultar()  {
+		ResponseConsulta hola =  parqueaderoService.consultarVehiculos();
+		System.out.println("hola" + hola.getListVehiculos().get(0).getPropietario());
+	}
+	
+	
+	
+	
+	
+	@Test
 	public void testSalirCarro() {
-		String placa = "GGH840";
+		String placa = "YKZ224";
 		ResponseSalidaVehiculo hola = parqueaderoService.calcularValorSalida(placa);
-		System.out.println("O LA LA LA"  + hola);
+		
+	}
+	
+	@Test
+	public void testIDNuev() {
+		
+		System.out.println("O LA LA LA"  + vehiculoRepositorio.findOne(1));
 		
 	}
 

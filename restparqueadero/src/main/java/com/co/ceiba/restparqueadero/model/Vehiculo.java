@@ -18,7 +18,11 @@ import java.util.Date;
 public class Vehiculo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	@Id
+	@Column(name="serial_id")
+	private int serialId;
+	
 	@Column(name="placa")
 	private String placa;
 
@@ -29,17 +33,26 @@ public class Vehiculo implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="hora_salida")
 	private Date horaSalida;
-
+	
+	@Column(name="propietario")
 	private String propietario;
 	
-	private int cilindraje;
+	@Column(name="cilindraje")
+	private Integer cilindraje;
 
-	//bi-directional many-to-one association to TiposVehiculo
+	
 	@ManyToOne
 	@JoinColumn(name="fk_tipo_vehiculo")
 	private TiposVehiculo tiposVehiculo;
 
+	public int getSerialId() {
+		return this.serialId;
+	}
 
+	public void setSerialId(int serialId) {
+		this.serialId = serialId;
+	}
+	
 	public String getPlaca() {
 		return this.placa;
 	}
@@ -62,11 +75,11 @@ public class Vehiculo implements Serializable {
 	public void setHoraSalida(Date horaSalida) {
 		this.horaSalida = horaSalida;
 	}
-	public int getCilindraje() {
+	public Integer getCilindraje() {
 		return this.cilindraje;
 	}
 
-	public void setCilindraje(int cilindraje) {
+	public void setCilindraje(Integer cilindraje) {
 		this.cilindraje = cilindraje;
 	}
 

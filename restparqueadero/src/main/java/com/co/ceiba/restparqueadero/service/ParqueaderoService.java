@@ -6,7 +6,7 @@ import com.co.ceiba.restparqueadero.model.Vehiculo;
 
 public interface ParqueaderoService {
 	
-	public String ingresoVehiculo(Vehiculo vehiculo);
+	public String ingresoVehiculo(String vehiculo);
 	public ResponseSalidaVehiculo calcularValorSalida(String placa);
 	public ResponseConsulta consultarVehiculos();
 

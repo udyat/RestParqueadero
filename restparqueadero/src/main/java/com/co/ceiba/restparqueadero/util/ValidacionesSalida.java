@@ -15,7 +15,9 @@ public class ValidacionesSalida {
 		DateTime dt = formatter.parseDateTime(fechaIngreso);
 		DateTime dateTime = new DateTime();
 		Period p = new Period(dt, dateTime);
-		return p.getHours() + p.getDays()*24 + p.getWeeks()*7*24 + p.getYears()*365*24;
+		int totalH = p.getHours() + p.getDays()*24 + p.getWeeks()*7*24 + p.getYears()*365*24;
+		if(p.getMinutes()> 0)totalH++;
+		return totalH;
 	}
 	
 	public int calculoPrecio(int totalHoras, Vehiculo vehiculo, Properties properties) {

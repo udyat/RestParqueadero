@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.co.ceiba.restparqueadero.bean.ResponseConsulta;
 import com.co.ceiba.restparqueadero.bean.ResponseSalidaVehiculo;
+import com.co.ceiba.restparqueadero.bean.VehiculoMap;
 import com.co.ceiba.restparqueadero.model.Vehiculo;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
 import com.co.ceiba.restparqueadero.util.Properties;
 import com.co.ceiba.restparqueadero.util.ValidacionesIngreso;
 import com.co.ceiba.restparqueadero.util.ValidacionesSalida;
+import com.google.gson.Gson;
 
 @Transactional
 @Service
@@ -29,41 +31,35 @@ public class ParqueaderoServiceImp implements ParqueaderoService {
 	
 	
 	@Override
-	public String ingresoVehiculo(Vehiculo vehiculo) {
-		String response = "";
-		
+	public String ingresoVehiculo(String vehiculoJson) {
+		Gson gson = new Gson();
+		VehiculoMap vehiculo = gson.fromJson(vehiculoJson, VehiculoMap.class);
 		ValidacionesIngreso validator = new ValidacionesIngreso();
 		try {
-			if(validator.valPlaca(vehiculo.getPlaca())) {
-				if(validator.valRegla(vehiculo.getPlaca(), properties.regla)) {
-						int conteoAutomovil = vehiculoRepositorio.contarVehiculos(vehiculo.getTiposVehiculo().getIdTipoVehiculo());
-						if(validator.valCapacidad(vehiculo.getTiposVehiculo().getIdTipoVehiculo(),conteoAutomovil,properties)) {
-							vehiculoRepositorio.save(vehiculo);
-							response = properties.msgExito;
-						}else {
-							response = properties.parqueaderoLLeno;
-						}
-				}else {
-					response = properties.msgDiaHabil;
-				}
-			}else {
-				response = properties.errorPlaca;
-			}
-			return response;
+			Vehiculo insertarVehiculo = validator.instanciarVehiculo(vehiculo);
+			validator.valPlaca(vehiculo.getPlaca(),properties);
+			validator.valRegla(vehiculo.getPlaca(),properties);
+			int conteoAutomovil = vehiculoRepositorio.contarVehiculos(vehiculo.getTipoVehiculo());
+			validator.valCapacidad(vehiculo.getTipoVehiculo(),conteoAutomovil,properties);
+			vehiculoRepositorio.save(insertarVehiculo);			
+			return properties.msgExito;
 		} catch (Exception e) {
 			logger.error(properties.errorGenerico + e);
-			return properties.errorGenerico;
+			return e.toString();
 		}
 		
 	}
 
 	@Override
 	public ResponseSalidaVehiculo calcularValorSalida(String placa) {
+		
 		ValidacionesSalida validador = new ValidacionesSalida();
+		
 		ResponseSalidaVehiculo respSalida = new ResponseSalidaVehiculo();
+		
 		int cobro = 0;
 		try {
-			Vehiculo vehiculo = vehiculoRepositorio.findOne(placa);
+			Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo(placa);
 			int horasTotales = validador.calculoHoras(vehiculo.getHoraIngreso().toString());
 			cobro = validador.calculoPrecio(horasTotales, vehiculo, properties);
 			Date hora = new Date();
