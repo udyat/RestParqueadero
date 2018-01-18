@@ -2,6 +2,7 @@ package com.co.ceiba.restparqueadero;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 
@@ -84,24 +85,95 @@ public class RestparqueaderoApplicationTests {
 	}
 	
 	@Test
-	public void testCobro() {
+	public void testCobroDiesHorasCarro() {
 		ValidacionesSalida valSalida = new ValidacionesSalida();
 		Vehiculo vehiculo = new Vehiculo();
 		TiposVehiculo tipov = new TiposVehiculo();
 		tipov.setIdTipoVehiculo(2);
 		vehiculo.setTiposVehiculo(tipov);
 		assertEquals(8000,valSalida.calculoPrecio(10, vehiculo, properties));
+
+	}
+	
+	
+	@Test
+	public void testCobroVentCuatroHorasCarro() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(2);
+		vehiculo.setTiposVehiculo(tipov);
 		assertEquals(8000,valSalida.calculoPrecio(24, vehiculo, properties));
+	}
+	
+	@Test
+	public void testCobroDosDiaCarro() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(2);
+		vehiculo.setTiposVehiculo(tipov);
 		assertEquals(16000,valSalida.calculoPrecio(40, vehiculo, properties));
+	}
+	
+	@Test
+	public void testCobroUnDiaCarro() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(2);
+		vehiculo.setTiposVehiculo(tipov);
 		assertEquals(11000,valSalida.calculoPrecio(27, vehiculo, properties));
 	}
+	@Test
+	public void testCobroDiesHorasMoto() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(1);
+		vehiculo.setTiposVehiculo(tipov);
+		assertEquals(8000,valSalida.calculoPrecio(10, vehiculo, properties));
+
+	}
+	
+	
+	@Test
+	public void testCobroVentCuatroHorasMoto() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(1);
+		vehiculo.setTiposVehiculo(tipov);
+		assertEquals(8000,valSalida.calculoPrecio(24, vehiculo, properties));
+	}
+	
+	@Test
+	public void testCobroDosDiaMoto() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(1);
+		vehiculo.setTiposVehiculo(tipov);
+		assertEquals(16000,valSalida.calculoPrecio(40, vehiculo, properties));
+	}
+	
+	@Test
+	public void testCobroUnDiaMoto() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(1);
+		vehiculo.setTiposVehiculo(tipov);
+		assertEquals(11000,valSalida.calculoPrecio(27, vehiculo, properties));
+	}
+	
 	
 	@Test
 	public void testRegla()  {
 		ValidacionesIngreso validacionesIngreso = new ValidacionesIngreso();
 		Vehiculo vehiculo = new Vehiculo();
 		TiposVehiculo tipov = new TiposVehiculo();
-		tipov.setIdTipoVehiculo(2);
+		tipov.setIdTipoVehiculo(1);
 		vehiculo.setTiposVehiculo(tipov);
 		
 		try {
@@ -113,8 +185,8 @@ public class RestparqueaderoApplicationTests {
 	
 	@Test
 	public void testConsultar()  {
-		ResponseConsulta hola =  parqueaderoService.consultarVehiculos();
-		System.out.println("hola" + hola.getListVehiculos().get(0).getPropietario());
+		ResponseConsulta RespConsultar =  parqueaderoService.consultarVehiculos();
+		assertNotNull(RespConsultar);
 	}
 	
 	
