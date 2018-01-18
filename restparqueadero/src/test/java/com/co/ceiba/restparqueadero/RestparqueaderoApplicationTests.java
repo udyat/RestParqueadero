@@ -219,9 +219,7 @@ public class RestparqueaderoApplicationTests {
 		ResponseSalidaVehiculo salidaVehiculo = parqueaderoService.calcularValorSalida("DEY535");
 		
 		assertNotNull(salidaVehiculo.getValor());
-		
-		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY535");
-		vehiculoRepositorio.delete(vehiculo);
+
 		
 	}
 	
