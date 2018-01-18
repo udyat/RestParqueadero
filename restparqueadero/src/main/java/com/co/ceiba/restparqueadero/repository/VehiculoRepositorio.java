@@ -1,5 +1,7 @@
 package com.co.ceiba.restparqueadero.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,8 @@ public interface VehiculoRepositorio extends JpaRepository<Vehiculo, Integer>{
 	
 	@Query(value = "SELECT * FROM Vehiculos WHERE placa = ?1 and hora_salida IS NULL", nativeQuery = true) 
 	Vehiculo buscarVehiculo(String placa);
+	
+	@Query(value = "SELECT * FROM Vehiculos WHERE hora_salida IS NULL", nativeQuery = true) 
+	List<Vehiculo> buscarTodasVehiculo();
 
 }

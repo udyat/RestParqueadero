@@ -80,7 +80,7 @@ public class ParqueaderoServiceImp implements ParqueaderoService {
 	public ResponseConsulta consultarVehiculos() {
 		ResponseConsulta respConsulta = new ResponseConsulta();
 		try {
-			List<Vehiculo> listaVeiculos = vehiculoRepositorio.findAll();
+			List<Vehiculo> listaVeiculos = vehiculoRepositorio.buscarTodasVehiculo();
 			respConsulta.setListVehiculos(listaVeiculos);
 			respConsulta.setMensaje(properties.msgExito);
 		} catch (Exception e) {
