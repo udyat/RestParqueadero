@@ -17,11 +17,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.co.ceiba.restparqueadero.bean.ResponseConsulta;
-import com.co.ceiba.restparqueadero.bean.ResponseSalidaVehiculo;
+import com.co.ceiba.restparqueadero.bean.VehiculoMap;
 import com.co.ceiba.restparqueadero.exception.VehiculoException;
 import com.co.ceiba.restparqueadero.model.TiposVehiculo;
 import com.co.ceiba.restparqueadero.model.Vehiculo;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
+import com.co.ceiba.restparqueadero.rest.ParqueaderoRest;
 import com.co.ceiba.restparqueadero.service.ParqueaderoService;
 import com.co.ceiba.restparqueadero.util.Properties;
 import com.co.ceiba.restparqueadero.util.ValidacionesIngreso;
@@ -185,6 +186,23 @@ public class RestparqueaderoApplicationTests {
 		assertEquals(5500,valSalida.calculoPrecio(27, vehiculo, properties));
 	}
 	
+	@Test
+	public void instanciaMap() {
+		VehiculoMap vehiculoMap = new VehiculoMap();
+		vehiculoMap.setCilindraje(0);
+		vehiculoMap.getCilindraje();
+		vehiculoMap.setPlaca("");
+		vehiculoMap.setPropietario("");
+		vehiculoMap.setTipoVehiculo(1);
+		
+	}
+	
+	@Test
+	public void instanciaRest() {
+		ParqueaderoRest rest = new ParqueaderoRest();
+		assertNotNull(rest);
+	}
+	
 	
 	@Test
 	public void testRegla()  {
@@ -214,14 +232,14 @@ public class RestparqueaderoApplicationTests {
 	@Test
 	public void testSalirCarro() {
 		String placa = "YKZ224";
-		ResponseSalidaVehiculo hola = parqueaderoService.calcularValorSalida(placa);
-		
+		parqueaderoService.calcularValorSalida(placa);
+		assertNotNull(parqueaderoService.calcularValorSalida(placa));
 	}
 	
 	@Test
 	public void testIDNuev() {
+		assertNotNull(vehiculoRepositorio.findOne(1));
 		
-		System.out.println("O LA LA LA"  + vehiculoRepositorio.findOne(1));
 		
 	}
 
