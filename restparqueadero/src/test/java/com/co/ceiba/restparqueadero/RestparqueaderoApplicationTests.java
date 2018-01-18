@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.co.ceiba.restparqueadero.bean.ResponseConsulta;
+import com.co.ceiba.restparqueadero.bean.ResponseSalidaVehiculo;
 import com.co.ceiba.restparqueadero.bean.VehiculoMap;
 import com.co.ceiba.restparqueadero.exception.VehiculoException;
 import com.co.ceiba.restparqueadero.model.TiposVehiculo;
@@ -210,16 +211,18 @@ public class RestparqueaderoApplicationTests {
 		ResponseConsulta RespConsultar =  parqueaderoService.consultarVehiculos();
 		assertNotNull(RespConsultar);
 	}
-	
-	
-	
-	
-	
 	@Test
 	public void testSalirCarro() {
-		String placa = "YKZ224";
-		parqueaderoService.calcularValorSalida(placa);
-		assertNotNull(parqueaderoService.calcularValorSalida(placa));
+		
+		String request = "{'placa': 'DEY535','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		parqueaderoService.ingresoVehiculo(request);
+		ResponseSalidaVehiculo salidaVehiculo = parqueaderoService.calcularValorSalida("DEY535");
+		
+		assertNotNull(salidaVehiculo.getValor());
+		
+		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY535");
+		vehiculoRepositorio.delete(vehiculo);
+		
 	}
 	
 	@Test
