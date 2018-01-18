@@ -125,6 +125,20 @@ public class RestparqueaderoApplicationTests {
 		vehiculo.setTiposVehiculo(tipov);
 		assertEquals(11000,valSalida.calculoPrecio(27, vehiculo, properties));
 	}
+	
+	@Test
+	public void testCobroDiesHorasMotoCilindraje() {
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		Vehiculo vehiculo = new Vehiculo();
+		TiposVehiculo tipov = new TiposVehiculo();
+		tipov.setIdTipoVehiculo(1);
+		vehiculo.setTiposVehiculo(tipov);
+		vehiculo.setCilindraje(800);
+		assertEquals(6000,valSalida.calculoPrecio(10, vehiculo, properties));
+
+	}
+	
+	
 	@Test
 	public void testCobroDiesHorasMoto() {
 		ValidacionesSalida valSalida = new ValidacionesSalida();
