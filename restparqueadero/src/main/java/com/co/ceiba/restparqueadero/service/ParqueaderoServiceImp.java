@@ -45,7 +45,7 @@ public class ParqueaderoServiceImp implements ParqueaderoService {
 			return properties.msgExito;
 		} catch (Exception e) {
 			logger.error(properties.errorGenerico + e);
-			return e.toString();
+			return e.getMessage();
 		}
 		
 	}
