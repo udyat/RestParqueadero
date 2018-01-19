@@ -245,8 +245,6 @@ public class RestparqueaderoApplicationTests {
 		ResponseSalidaVehiculo resp = new ResponseSalidaVehiculo();
 		Mockito.when(parqueaderoServicemock.calcularValorSalida("DEY555")).thenReturn(resp);
 		assertEquals(resp, parqueaderoServicemock.calcularValorSalida("DEY555"));
-
-		
 	}
 	
 
