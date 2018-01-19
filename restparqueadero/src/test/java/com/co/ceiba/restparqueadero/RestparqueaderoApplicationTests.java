@@ -240,6 +240,7 @@ public class RestparqueaderoApplicationTests {
 
 		
 	}
+	
 	@Test
 	public void testMockSalirVehiculo() {
 		ResponseSalidaVehiculo resp = new ResponseSalidaVehiculo();
