@@ -3,15 +3,14 @@ package com.co.ceiba.restparqueadero;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-import java.util.Date;
-
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -40,6 +39,10 @@ public class RestparqueaderoApplicationTests {
 	@Autowired
 	 VehiculoRepositorio vehiculoRepositorio;
 	
+	@Mock
+	ParqueaderoService parqueaderoServicemock;
+	
+
 	@Autowired
 	ParqueaderoService parqueaderoService;
 	
@@ -227,8 +230,25 @@ public class RestparqueaderoApplicationTests {
 	public void testIDNuev() {
 		assertNotNull(vehiculoRepositorio.findOne(1));
 		
+	}
+	
+	@Test
+	public void testMockInsertarVehiculo() {
+		String request = "{'placa': 'DEY555','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		Mockito.when(parqueaderoServicemock.ingresoVehiculo(request)).thenReturn("Exito");
+		assertEquals("Exito", parqueaderoServicemock.ingresoVehiculo(request));
+
 		
 	}
+	@Test
+	public void testMockSalirVehiculo() {
+		ResponseSalidaVehiculo resp = new ResponseSalidaVehiculo();
+		Mockito.when(parqueaderoServicemock.calcularValorSalida("DEY555")).thenReturn(resp);
+		assertEquals(resp, parqueaderoServicemock.calcularValorSalida("DEY555"));
+
+		
+	}
+	
 
 
 }
