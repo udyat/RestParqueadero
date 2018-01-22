@@ -189,7 +189,9 @@ public class RestparqueaderoApplicationTests {
 		vehiculoMap.getPropietario();
 		vehiculoMap.setTipoVehiculo(1);
 		vehiculoMap.getTipoVehiculo();
-		
+		TiposVehiculo tipo = new TiposVehiculo();
+		tipo.setDescripcion("hola");
+		tipo.setIdTipoVehiculo(1);
 	}
 	
 	@Test
