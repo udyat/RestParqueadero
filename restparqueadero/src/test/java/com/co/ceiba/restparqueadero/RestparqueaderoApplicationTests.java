@@ -74,7 +74,6 @@ public class RestparqueaderoApplicationTests {
 		DateTime dateTime = new DateTime();
 		Period p = new Period(dt, dateTime);
 		int horasToT = p.getHours() + p.getDays()*24 + p.getWeeks()*7*24 + p.getYears()*365*24;
-		System.out.println(horasToT);
 	}
 	
 	@Test
@@ -231,6 +230,11 @@ public class RestparqueaderoApplicationTests {
 		assertNotNull(salidaVehiculo.getValor());
 
 		
+	}
+	@Test
+	public void testConsultarCarro() {
+		ResponseConsulta response = parqueaderoService.consultarVehiculos();
+		assertNotNull(response);
 	}
 	
 	@Test
