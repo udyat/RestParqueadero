@@ -53,6 +53,11 @@ public class RestparqueaderoApplicationTests {
 		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY555");
 		vehiculoRepositorio.delete(vehiculo);
 	}
+	@Test
+	public void testException() {
+		String request = "{'placa': 'YYYYYY','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		parqueaderoService.ingresoVehiculo(request);
+	}
 	
 	@Test
 	public void ingresarVehiculoCarro() {

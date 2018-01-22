@@ -55,7 +55,6 @@ test {
 	}
 	reports.junitXml.destination = file("jacoco/test-results")
 }
-
 jacocoTestReport{
 	reports {
         xml.enabled false
