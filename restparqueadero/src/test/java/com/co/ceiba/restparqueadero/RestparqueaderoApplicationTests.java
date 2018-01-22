@@ -234,7 +234,12 @@ public class RestparqueaderoApplicationTests {
 	@Test
 	public void testConsultarCarro() {
 		ResponseConsulta response = parqueaderoService.consultarVehiculos();
-		assertNotNull(response);
+		assertNotNull(response.getListVehiculos());
+	}
+	@Test
+	public void testConsultarCarroMsj() {
+		ResponseConsulta response = parqueaderoService.consultarVehiculos();
+		assertNotNull(response.getMensaje());
 	}
 	
 	@Test
