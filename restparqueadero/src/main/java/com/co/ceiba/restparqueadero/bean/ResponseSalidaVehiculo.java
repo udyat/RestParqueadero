@@ -1,5 +1,9 @@
 package com.co.ceiba.restparqueadero.bean;
 
+/**
+ * Clase de Mapeo del response del Rest de Salida de vehiculo
+ * @author: Daniel.Mejia
+ */
 public class ResponseSalidaVehiculo {
 	
 	private int valor;

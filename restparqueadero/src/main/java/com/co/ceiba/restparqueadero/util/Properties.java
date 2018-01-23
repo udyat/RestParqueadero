@@ -3,11 +3,18 @@ package com.co.ceiba.restparqueadero.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Clase para las instancias de las propiedades
+ * @author: Daniel.Mejia
+ */
 @Component
 public class Properties {
 	
 	@Value("${parqueadero.mensaje.parqueaderolleno}")
 	public String parqueaderoLLeno;	
+	
+	@Value("${parqueadero.mensaje.noVehiculo}")
+	public String noVehiculo;	
 	
 	@Value("${parqueadero.mensaje.error.generico}")
 	public String errorGenerico;

@@ -9,8 +9,7 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the vehiculos database table.
- * 
+ * Clase de persistencia para la tabla de vehiculos de la base de datos.
  */
 @Entity
 @Table(name="vehiculos")

@@ -1,5 +1,9 @@
 package com.co.ceiba.restparqueadero.bean;
 
+/**
+ * Clase de Mapeo de la informacion de un vehiculo
+ * @author: Daniel.Mejia
+ */
 public class VehiculoMap {
 	
 	private String placa;

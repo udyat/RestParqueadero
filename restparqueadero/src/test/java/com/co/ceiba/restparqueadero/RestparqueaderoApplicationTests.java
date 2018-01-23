@@ -3,12 +3,10 @@ package com.co.ceiba.restparqueadero;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import com.co.ceiba.restparqueadero.model.Vehiculo;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
 import com.co.ceiba.restparqueadero.rest.ParqueaderoRest;
 import com.co.ceiba.restparqueadero.service.ParqueaderoService;
+import com.co.ceiba.restparqueadero.service.ParqueaderoServiceImp;
 import com.co.ceiba.restparqueadero.util.Properties;
 import com.co.ceiba.restparqueadero.util.ValidacionesIngreso;
 import com.co.ceiba.restparqueadero.util.ValidacionesSalida;
@@ -40,7 +39,7 @@ public class RestparqueaderoApplicationTests {
 	 VehiculoRepositorio vehiculoRepositorio;
 	
 	@Mock
-	ParqueaderoService parqueaderoServicemock;
+	ParqueaderoServiceImp parqueaderoServicemock;
 	
 
 	@Autowired
@@ -48,9 +47,9 @@ public class RestparqueaderoApplicationTests {
 	
 	@Test
 	public void ingresarVehiculoMoto() {
-		String request = "{'placa': 'DEY555','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		String request = "{'placa': 'DEY566','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
 		parqueaderoService.ingresoVehiculo(request);
-		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY555");
+		Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo("DEY566");
 		vehiculoRepositorio.delete(vehiculo);
 	}
 	@Test
@@ -68,12 +67,11 @@ public class RestparqueaderoApplicationTests {
 	}
 	@Test
 	public void horas() {
-		String fechaIngreso = "2018-01-15 06:30:45";
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-		DateTime dt = formatter.parseDateTime(fechaIngreso);
-		DateTime dateTime = new DateTime();
-		Period p = new Period(dt, dateTime);
-		int horasToT = p.getHours() + p.getDays()*24 + p.getWeeks()*7*24 + p.getYears()*365*24;
+		String fechaIngreso = "2018-01-22 13:00:45.000";
+
+		ValidacionesSalida valSalida = new ValidacionesSalida();
+		int horas = valSalida.calculoHoras(String.valueOf(fechaIngreso));
+		System.out.println("asd" + horas);
 	}
 	
 	@Test
@@ -221,12 +219,11 @@ public class RestparqueaderoApplicationTests {
 		assertNotNull(RespConsultar);
 	}
 	@Test
-	public void testSalirCarro() {
+	public void testSalirMoto() {
 		
-		String request = "{'placa': 'DEY535','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		String request = "{'placa': 'DEY5635','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
 		parqueaderoService.ingresoVehiculo(request);
-		ResponseSalidaVehiculo salidaVehiculo = parqueaderoService.calcularValorSalida("DEY535");
-		
+		ResponseSalidaVehiculo salidaVehiculo = parqueaderoService.calcularValorSalida("DEY5635");
 		assertNotNull(salidaVehiculo.getValor());
 
 		

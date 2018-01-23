@@ -5,8 +5,7 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the tipos_vehiculo database table.
- * 
+ * Clase de persistencia para la tabla de tipos_vehiculo de la base de datos.
  */
 @Entity
 @Table(name="tipos_vehiculo")

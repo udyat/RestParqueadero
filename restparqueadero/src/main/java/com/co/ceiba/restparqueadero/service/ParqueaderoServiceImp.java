@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.co.ceiba.restparqueadero.bean.ResponseConsulta;
 import com.co.ceiba.restparqueadero.bean.ResponseSalidaVehiculo;
 import com.co.ceiba.restparqueadero.bean.VehiculoMap;
+import com.co.ceiba.restparqueadero.exception.VehiculoException;
 import com.co.ceiba.restparqueadero.model.Vehiculo;
 import com.co.ceiba.restparqueadero.repository.VehiculoRepositorio;
 import com.co.ceiba.restparqueadero.util.Properties;
@@ -18,6 +19,11 @@ import com.co.ceiba.restparqueadero.util.ValidacionesIngreso;
 import com.co.ceiba.restparqueadero.util.ValidacionesSalida;
 import com.google.gson.Gson;
 
+
+/**
+ * Clase para las validaciones del Rest de Salida de Vehiculos
+ * @author: Daniel.Mejia
+ */
 @Transactional
 @Service
 public class ParqueaderoServiceImp implements ParqueaderoService {
@@ -25,11 +31,16 @@ public class ParqueaderoServiceImp implements ParqueaderoService {
 	private static final Logger logger = LoggerFactory.getLogger(ParqueaderoServiceImp.class); 
 	
 	@Autowired
-	 Properties properties;
+	Properties properties;
+	
 	@Autowired
 	 VehiculoRepositorio vehiculoRepositorio;
 	
-	
+	/**
+     * Implementacion del Servicio de Ingreso de Vehiculos
+     * @param vehiculoJson String que contiene el request enforma de Json del
+     * vehiculo que sera insertado.
+     */
 	@Override
 	public String ingresoVehiculo(String vehiculoJson) {
 		Gson gson = new Gson();
@@ -50,16 +61,22 @@ public class ParqueaderoServiceImp implements ParqueaderoService {
 		
 	}
 
+	/**
+     * Implementacion del Servicio Salida de Vehiculos
+     * @param placa String que contiene la placa del vehiculo que saldrá del parqueadero
+     * vehiculo que sera insertado.
+     */
 	@Override
 	public ResponseSalidaVehiculo calcularValorSalida(String placa) {
-		
 		ValidacionesSalida validador = new ValidacionesSalida();
-		
+		ValidacionesIngreso validator = new ValidacionesIngreso();
 		ResponseSalidaVehiculo respSalida = new ResponseSalidaVehiculo();
 		
 		int cobro = 0;
 		try {
+			validator.valPlaca(placa,properties);
 			Vehiculo vehiculo = vehiculoRepositorio.buscarVehiculo(placa);
+			if(null != vehiculo) {
 			int horasTotales = validador.calculoHoras(vehiculo.getHoraIngreso().toString());
 			cobro = validador.calculoPrecio(horasTotales, vehiculo, properties);
 			Date hora = new Date();
@@ -68,14 +85,18 @@ public class ParqueaderoServiceImp implements ParqueaderoService {
 			vehiculoRepositorio.save(vehiculo);
 			respSalida.setValor(cobro);
 			respSalida.setMensaje(properties.msgExito);
+			}else {throw new VehiculoException(properties.noVehiculo);}
 		} catch (Exception e) {
-			logger.error(properties.errorGenerico + e);
+			logger.error("ERROR" + e);
 			respSalida.setValor(0);
-			respSalida.setMensaje(properties.errorGenerico);
+			respSalida.setMensaje(e.getMessage());
 		}
 		return respSalida;
 	}
 
+	/**
+     * Implementacion del Servicio Consultar todos los vehiculos
+     */
 	@Override
 	public ResponseConsulta consultarVehiculos() {
 		ResponseConsulta respConsulta = new ResponseConsulta();
