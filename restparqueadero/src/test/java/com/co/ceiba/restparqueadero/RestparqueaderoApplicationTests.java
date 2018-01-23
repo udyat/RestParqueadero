@@ -221,9 +221,9 @@ public class RestparqueaderoApplicationTests {
 	@Test
 	public void testSalirMoto() {
 		
-		String request = "{'placa': 'DEY5635','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
+		String request = "{'placa': 'DEY565','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
 		parqueaderoService.ingresoVehiculo(request);
-		ResponseSalidaVehiculo salidaVehiculo = parqueaderoService.calcularValorSalida("DEY5635");
+		ResponseSalidaVehiculo salidaVehiculo = parqueaderoService.calcularValorSalida("DEY565");
 		assertNotNull(salidaVehiculo.getValor());
 
 		
