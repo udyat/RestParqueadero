@@ -31,6 +31,14 @@ import com.co.ceiba.restparqueadero.util.ValidacionesSalida;
 @SpringBootTest
 public class RestparqueaderoApplicationTests {
 
+	@InjectMocks
+	ParqueaderoServiceImp parqueaderoServicemock;
+	
+	@Mock
+	Properties propertiesmock;
+	
+	@Mock
+	 VehiculoRepositorio vehiculoRepositoriomock;
 	
 	@Autowired
 	 Properties properties;
@@ -38,8 +46,7 @@ public class RestparqueaderoApplicationTests {
 	@Autowired
 	 VehiculoRepositorio vehiculoRepositorio;
 	
-	@Mock
-	ParqueaderoServiceImp parqueaderoServicemock;
+	
 	
 
 	@Autowired
@@ -246,19 +253,22 @@ public class RestparqueaderoApplicationTests {
 	}
 	
 	@Test
-	public void testMockInsertarVehiculo() {
+	public void testMockInsertarVehiculos() {
+		
+		//arrange
+		VehiculoRepositorio vehiculoRepositorioMock =  Mockito.mock(VehiculoRepositorio.class);
 		String request = "{'placa': 'DEY555','propietario': 'German','tipoVehiculo': 1,'cilindraje': 500}";
-		Mockito.when(parqueaderoServicemock.ingresoVehiculo(request)).thenReturn("Exito");
-		assertEquals("Exito", parqueaderoServicemock.ingresoVehiculo(request));
+		Vehiculo vehiculo = new Vehiculo();		
+		Mockito.when(vehiculoRepositorioMock.save(Mockito.any(Vehiculo.class))).thenReturn(vehiculo);		
+		ParqueaderoService parqueaderoService = new ParqueaderoServiceImp(properties, vehiculoRepositorioMock);
+		
+		//act
+		String resultadoIngresoVehiculo = parqueaderoService.ingresoVehiculo(request);
+		
+		//assert
+		assertEquals("Transacción Exitosa.", resultadoIngresoVehiculo);
 
 		
-	}
-	
-	@Test
-	public void testMockSalirVehiculo() {
-		ResponseSalidaVehiculo resp = new ResponseSalidaVehiculo();
-		Mockito.when(parqueaderoServicemock.calcularValorSalida("DEY555")).thenReturn(resp);
-		assertEquals(resp, parqueaderoServicemock.calcularValorSalida("DEY555"));
 	}
 	
 
